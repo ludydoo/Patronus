@@ -9,18 +9,13 @@ namespace Patronus.Tests.Numeric
     public class NumericTest
     {
 
-        private INumeric<int> _intNumeric = new global::Patronus.Numeric.Numeric();
-        private INumeric<float> _floatNumeric = new global::Patronus.Numeric.Numeric();
-        private INumeric<double> _doubleNumeric = new global::Patronus.Numeric.Numeric();
-        private INumeric<long> _longNumeric = new global::Patronus.Numeric.Numeric();
-        private INumeric<short> _shortNumeric = new global::Patronus.Numeric.Numeric();
-        private INumeric<decimal> _decimalNumeric = new global::Patronus.Numeric.Numeric();
-        private INumeric<byte> _byteNumeric = new global::Patronus.Numeric.Numeric();
-
-        public void TestNumericInt()
-        {
-            
-        }
+        private readonly INumeric<int> _intNumeric = new global::Patronus.Numeric.Numeric();
+        private readonly INumeric<float> _floatNumeric = new global::Patronus.Numeric.Numeric();
+        private readonly INumeric<double> _doubleNumeric = new global::Patronus.Numeric.Numeric();
+        private readonly INumeric<long> _longNumeric = new global::Patronus.Numeric.Numeric();
+        private readonly INumeric<short> _shortNumeric = new global::Patronus.Numeric.Numeric();
+        private readonly INumeric<decimal> _decimalNumeric = new global::Patronus.Numeric.Numeric();
+        private readonly INumeric<byte> _byteNumeric = new global::Patronus.Numeric.Numeric();
 
         [Fact]
         public void TestIntNumeric()
