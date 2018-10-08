@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 namespace Patronus.Enumerators
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Iterates through each vector of a matrix
+    /// </summary>
+    /// <typeparam name="T">The data type of the matrix</typeparam>
     public class MatrixEnumerator<T> : IEnumerator<T>
     {
         private readonly Matrix<T> _matrix;
@@ -34,7 +39,6 @@ namespace Patronus.Enumerators
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
     }
 }

@@ -8,13 +8,25 @@ using Patronus.Enumerators;
 namespace Patronus.Operators
 {
 
-
+    /// <summary>
+    /// Unwrapping mode
+    /// </summary>
     public enum UnwrapMode
     {
+        /// <summary>
+        /// Will add dimensions to fit the inner matrices
+        /// </summary>
         Discrete,
+        /// <summary>
+        /// Will unwrap the matrices without adding dimensions
+        /// </summary>
         Expand
     }
 
+    /// <summary>
+    /// Unwraps inner matrices
+    /// </summary>
+    /// <typeparam name="T">Data type of the matrix</typeparam>
     public class Unwrap<T> : UnaryOperator<Matrix<Matrix<T>>, Matrix<T>>
     {
         internal const UnwrapMode DefaultMode = UnwrapMode.Discrete;

@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Patronus.Assertions
 {
+    /// <summary>
+    /// Validates that a given dimensional index is valid for a matrix. 
+    /// </summary>
     public static class ValidIndexAssertion
     {
 

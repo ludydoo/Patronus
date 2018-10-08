@@ -5,6 +5,11 @@ using System.Text;
 
 namespace Patronus.Operators
 {
+
+    /// <summary>
+    /// Operator that removes size-one dimensions from a matrix
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Squeeze<T> : UnaryOperator<Matrix<T>, Matrix<T>>
     {
 

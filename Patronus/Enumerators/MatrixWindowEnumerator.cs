@@ -18,6 +18,10 @@ namespace Patronus.Enumerators
         public Matrix<T> Matrix { get; }
     }
 
+    /// <summary>
+    /// Iterates through each sub window of a matrix
+    /// </summary>
+    /// <typeparam name="T">The data type of the matrix</typeparam>
     public class MatrixWindowEnumerator<T> : IEnumerator<MatrixWindowEnumeratorStride<T>>
     {
         private readonly Matrix<T> _matrix;
@@ -28,6 +32,12 @@ namespace Patronus.Enumerators
         private IList<int> _currentStepPerDimension;
         private bool _isFirst = true;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="matrix">The matrix to iterate into</param>
+        /// <param name="windowSize">The dimensional sizes of the window</param>
+        /// <param name="strides">The dimensional strides (or jumps) to iterate</param>
         public MatrixWindowEnumerator(Matrix<T> matrix, IEnumerable<int> windowSize, IEnumerable<int> strides = null)
         {
             _matrix = matrix;

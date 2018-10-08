@@ -3,8 +3,14 @@ using System.Linq;
 
 namespace Patronus.Comparers
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Compares the equality between two matrices
+    /// </summary>
+    /// <typeparam name="T">The matrix data type</typeparam>
     public class MatrixEqualityComparer<T> : IEqualityComparer<Matrix<T>>
     {
+        /// <inheritdoc />
         public bool Equals(Matrix<T> left, Matrix<T> right)
         {
 

@@ -4,6 +4,10 @@ using JetBrains.Annotations;
 
 namespace Patronus.Enumerators
 {
+    /// <summary>
+    /// Iterates through each index of a matrix
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class MatrixIndexEnumerator<T> : IEnumerator<IEnumerable<int>>
     {
         private readonly IndexEnumerator _internalEnumerator;

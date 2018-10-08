@@ -5,15 +5,23 @@ using Patronus.Numeric;
 
 namespace Patronus.Operators
 {
+    /// <summary>
+    /// Operator that puts sequenced data in a matrix
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Sequence<T> : UnaryOperator<Matrix<T>, Matrix<T>>
     {
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="start">The starting value of the sequence</param>
         public Sequence(T start)
         {
             Start = start;
         }
 
-        public T Start { get; set; }
+        private T Start { get; set; }
 
         protected override void DoInference()
         {

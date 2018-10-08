@@ -6,9 +6,14 @@ using Patronus.Enumerators;
 
 namespace Patronus.Operators
 {
+
+    /// <summary>
+    /// Concatenates two matrices in the given dimension
+    /// </summary>
+    /// <typeparam name="T">The data type of the matrices to concatenate</typeparam>
     public class Concatenation<T> : BinaryOperator<Matrix<T>, Matrix<T>, Matrix<T>>
     {
-        public int DimensionIndex { get; }
+        private int DimensionIndex { get; }
 
         public Concatenation(int dimensionIndex)
         {
@@ -21,8 +26,12 @@ namespace Patronus.Operators
             var matrix = Left;
             var other = Right;
 
+            // Checks that two matrices have the same number of dimensions
             if (matrix.DimensionCount != other.DimensionCount)
                 throw new InvalidOperationException("The two matrixes must have the same number of dimensions");
+
+            // Gets the sizes of the dimensions (other than the concatenated dimension)
+            // And checks that they're all of the same size
 
             var sizeA = matrix.Sizes.Where((element, index) => index != DimensionIndex);
             var sizeB = other.Sizes.Where((element, index) => index != DimensionIndex);
@@ -38,6 +47,7 @@ namespace Patronus.Operators
             // The resulting matrix size
             var resultSizes = matrix.Sizes.ToList();
 
+            // DimensionIndex < 0
             if (DimensionIndex < 0)
             {
                 // In this case, we add dimensions "before" 

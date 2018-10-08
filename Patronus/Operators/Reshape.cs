@@ -5,10 +5,14 @@ using System.Text;
 
 namespace Patronus.Operators
 {
+
+    /// <summary>
+    /// Operator that changes the shape of a matrix
+    /// </summary>
+    /// <typeparam name="T">Data type of the matrix</typeparam>
     public class Reshape<T> : UnaryOperator<Matrix<T>, Matrix<T>>
     {
-
-        public IEnumerable<int> Sizes { get; set; }
+        private IEnumerable<int> Sizes { get; set; }
 
         public Reshape(IEnumerable<int> sizes)
         {
@@ -27,7 +31,7 @@ namespace Patronus.Operators
             if (negativeIndexIndex != -1)
             {
                 var i = sizeList.Where((t, j) => j != negativeIndexIndex).Aggregate(1, (current, t) => current * t);
-                float negativeIndexInferredSize = (float)Param.VectorCount / (float)i;
+                var negativeIndexInferredSize = (float)Param.VectorCount / (float)i;
 
                 if (negativeIndexInferredSize % 1 > 0)
                     throw new InvalidOperationException();

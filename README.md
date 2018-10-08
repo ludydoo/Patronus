@@ -16,5 +16,5 @@ var matrix = Patronus.Matrix(3, 3, 3)
 
 // Create a 2x2 matrix from data
 var matrix = Patronus.From(1, 2, 3, 4).Reshape(2, 2);
-var matrix = Patronus.Matrix(2, 2, new int[]{1, 2, 3, 4);
+var matrix = Patronus.Matrix(2, 2, new int[]{1, 2, 3, 4});
 ```

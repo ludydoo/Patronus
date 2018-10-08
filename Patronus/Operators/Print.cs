@@ -8,9 +8,13 @@ using Patronus.Printers;
 
 namespace Patronus.Operators
 {
+    /// <summary>
+    /// Prints a matrix
+    /// </summary>
+    /// <typeparam name="T">Data type of the matrix</typeparam>
     public class Print<T> : UnaryOperator<Matrix<T>, Matrix<T>>
     {
-        public IMatrixPrinter Printer { get; set; }
+        private IMatrixPrinter Printer { get; set; }
 
         public Print(IMatrixPrinter printer)
         {

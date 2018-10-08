@@ -6,13 +6,22 @@ using Patronus.Enumerators;
 
 namespace Patronus.Operators
 {
+
+    /// <summary>
+    /// Operator that wraps the number of dimensions in a sub matrix
+    /// </summary>
+    /// <typeparam name="T">Data type of the matrix</typeparam>
     public class Wrap<T> : UnaryOperator<Matrix<T>, Matrix<Matrix<T>>>
     {
 
         public const int DefaultDimensions = 2;
 
-        public int Dimensions { get; set; }
+        private int Dimensions { get; set; }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="dimensions">The number of dimensions to wrap</param>
         public Wrap(int dimensions = DefaultDimensions)
         {
             Dimensions = dimensions;

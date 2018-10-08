@@ -6,10 +6,15 @@ using Patronus.Enumerators;
 
 namespace Patronus.Operators
 {
+
+    /// <summary>
+    /// Pads a matrix with the given value
+    /// </summary>
+    /// <typeparam name="T">The data type of the matrix</typeparam>
     public class Pad<T> : UnaryOperator<Matrix<T>, Matrix<T>>
     {
 
-        public T PaddingValue { get; set; }
+        private T PaddingValue { get; set; }
 
         public Pad(T paddingValue)
         {

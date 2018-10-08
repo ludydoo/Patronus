@@ -6,6 +6,10 @@ using Patronus.Extensions;
 
 namespace Patronus.Enumerators
 {
+    /// <summary>
+    /// Enumerator for a dimensional index
+    /// Will iterate through each dimensions
+    /// </summary>
     public class IndexEnumerator : IEnumerator<IEnumerable<int>>
     {
         private readonly IEnumerable<int> _sizes;
