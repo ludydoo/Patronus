@@ -1,0 +1,7 @@
+language: csharp
+solution: Patronus.sln
+install:
+- dotnet restore
+script:
+- dotnet build
+- dotnet test Patronus.Tests/Patronus.Test.csproj
