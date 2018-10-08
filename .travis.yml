@@ -1,7 +1,7 @@
 language: csharp
 solution: Patronus.sln
 mono: none
-dotnet: 2.0.3
+dotnet: 2.1.300
 script:
 - cd Patronus.Tests
 - dotnet restore
