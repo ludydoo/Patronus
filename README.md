@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ludydoo/Patronus.svg?branch=master)](https://travis-ci.org/ludydoo/Patronus)
+
 # Patronus
 
 N-Dimensional matrix operations
