@@ -6,4 +6,4 @@ script:
 - cd Patronus.Tests
 - dotnet restore
 - dotnet build
-- dotnet test Patronus.Test.csproj
+- dotnet test
