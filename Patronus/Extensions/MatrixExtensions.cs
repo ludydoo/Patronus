@@ -111,9 +111,9 @@ namespace Patronus.Extensions
         }
 
         /// <see cref="Operators.Squeeze{T}"/>
-        public static Matrix<T> Squeeze<T>(this Matrix<T> matrix)
+        public static Matrix<T> Squeeze<T>(this Matrix<T> matrix, params int[] dimensions)
         {
-            return new Squeeze<T>()
+            return new Squeeze<T>(dimensions)
             {
                 Param = matrix
             };

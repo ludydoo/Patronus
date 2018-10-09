@@ -61,17 +61,17 @@ namespace Patronus.Operators
             var matrix = Param;
 
             // The size of the "from" dimension
-            var sizeFrom = matrix.Sizes.ElementAt(DimensionFrom - 1);
+            var sizeFrom = matrix.Sizes.ElementAt(DimensionFrom);
 
             // The size of the "to" dimension
-            var sizeTo = matrix.Sizes.ElementAt(DimensionTo - 1);
+            var sizeTo = matrix.Sizes.ElementAt(DimensionTo);
 
             // The final size of the "to" dimension, after flattening
             var finalSizeTo = sizeTo * sizeFrom;
 
             // The final size of the resulting matrix
-            var finalSizes = new List<int>(matrix.Sizes) { [DimensionTo - 1] = finalSizeTo };
-            finalSizes.RemoveAt(DimensionFrom - 1);
+            var finalSizes = new List<int>(matrix.Sizes) { [DimensionTo] = finalSizeTo };
+            finalSizes.RemoveAt(DimensionFrom);
 
             // The strategy here is quite simple.
             //
@@ -106,19 +106,19 @@ namespace Patronus.Operators
             // This will contain the reordered indexes
             var reorderedIndexes = new List<int>();
             for (var i = 0; i < matrix.DimensionCount; i++) reorderedIndexes.Add(i);
-            reorderedIndexes.RemoveAt(DimensionFrom - 1);
+            reorderedIndexes.RemoveAt(DimensionFrom);
 
             // This contains the index of the "to" dimension in our reordered index list
-            var toOrderIndex = reorderedIndexes.IndexOf(DimensionTo - 1);
+            var toOrderIndex = reorderedIndexes.IndexOf(DimensionTo);
 
             // Double dispatch, depending on mode
             switch (Mode)
             {
                 case FlattenMode.Interpose:
-                    reorderedIndexes.Insert(toOrderIndex + 1, DimensionFrom - 1);
+                    reorderedIndexes.Insert(toOrderIndex + 1, DimensionFrom);
                     break;
                 case FlattenMode.Extend:
-                    reorderedIndexes.Insert(toOrderIndex, DimensionFrom - 1);
+                    reorderedIndexes.Insert(toOrderIndex, DimensionFrom);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(Mode), Mode, null);

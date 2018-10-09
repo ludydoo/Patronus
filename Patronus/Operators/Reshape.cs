@@ -21,6 +21,9 @@ namespace Patronus.Operators
 
         protected override void DoInference()
         {
+
+            var result = Param.Clone();
+
             var sizeList = Sizes.ToList();
 
             if (sizeList.Count(i => i == -1) > 1)
@@ -39,9 +42,9 @@ namespace Patronus.Operators
                 sizeList[negativeIndexIndex] = (int)negativeIndexInferredSize;
             }
 
+            result.SetSize(sizeList, false, false);
 
-            Param.SetSize(sizeList, false, false);
-            Output = Param;
+            Output = result;
         }
     }
 }

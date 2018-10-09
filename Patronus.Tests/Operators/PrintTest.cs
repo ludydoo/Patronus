@@ -26,15 +26,25 @@ namespace Patronus.Tests.Operators
 
             var expected = new List<string>()
             {
-                "++++++++  ",
-                "+ 1  2 +  ",
-                "+ 3  4 +  ",
-                "++++++++  "
+                " ++++++++ ",
+                " + 1  2 + ",
+                " + 3  4 + ",
+                " ++++++++ "
             };
 
             matrix.Print(Printer);
 
             printer.Verify(matrixPrinter => matrixPrinter.Print(expected));
+
+        }
+
+        [Fact]
+        public void TestPrint4d()
+        {
+
+            var matrix = new Matrix<int>(2, 2, 2, 2).Sequence(1);
+
+            Print(matrix);
 
         }
 
