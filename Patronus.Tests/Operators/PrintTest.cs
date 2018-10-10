@@ -48,6 +48,27 @@ namespace Patronus.Tests.Operators
 
         }
 
+        [Fact]
+        public void TestPrint1s()
+        {
+
+            var matrix = new Matrix<int>(2).Sequence(1);
+
+            Print(matrix);
+
+        }
+
+
+        [Fact]
+        public void TestPrintWrapped()
+        {
+
+            var matrix = new Matrix<int>(2, 2, 2, 2).Sequence(1).Wrap();
+
+            Print(matrix);
+
+        }
+
         public PrintTest(ITestOutputHelper output) : base(output)
         {
         }

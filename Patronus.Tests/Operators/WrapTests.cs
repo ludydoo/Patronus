@@ -25,6 +25,7 @@ namespace Patronus.Tests.Operators
             Print(matrix, result, expected);
 
             Assert.True(expected.Equals(result));
+            Assert.True(matrix.Equals(result.Unwrap()));
 
         }
 
@@ -47,6 +48,7 @@ namespace Patronus.Tests.Operators
             Print(matrix, result, expected);
 
             Assert.True(expected.Equals(result));
+            Assert.True(matrix.Equals(result.Unwrap()));
 
         }
 
@@ -63,8 +65,31 @@ namespace Patronus.Tests.Operators
             Print(matrix, result, expected);
 
             Assert.True(expected.Equals(result));
+        }
+
+        [Fact]
+        public void TestWrap4d()
+        {
+
+            var matrix = new Matrix<int>(2, 2, 2, 2).Sequence(1);
+
+            var result = matrix.Wrap();
+
+            var expected = new Matrix<Matrix<int>>(2, 2).SetData(new List<Matrix<int>>()
+            {
+                new Matrix<int>(2, 2).SetData(new []{1, 2, 3, 4}),
+                new Matrix<int>(2, 2).SetData(new []{5, 6, 7, 8}),
+                new Matrix<int>(2, 2).SetData(new []{9, 10, 11, 12}),
+                new Matrix<int>(2, 2).SetData(new []{13, 14, 15, 16})
+            });
+
+            Print(matrix, result, expected);
+
+            Assert.True(expected.Equals(result));
+            Assert.True(matrix.Equals(result.Unwrap()));
 
         }
+
 
         public WrapTests(ITestOutputHelper output) : base(output)
         {

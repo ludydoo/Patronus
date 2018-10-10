@@ -8,6 +8,7 @@ using Patronus.Comparers;
 using Patronus.Enumerators;
 using Patronus.Extensions;
 using Patronus.Numeric;
+using Patronus.Printers;
 
 namespace Patronus
 {
@@ -402,6 +403,13 @@ namespace Patronus
             return sizes.GetHashCode();
         }
 
+
+        public override string ToString()
+        {
+            var printer = new StringListPrinter();
+            this.Print(printer);
+            return string.Join(Environment.NewLine, printer.Output);
+        }
 
         public void ForEach(Action<IEnumerable<int>, int, T> predicate)
         {

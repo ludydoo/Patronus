@@ -26,8 +26,12 @@ var matrix = Patronus.Matrix(2, 2, new int[]{1, 2, 3, 4});
 Creates a matrix with sequenced data
 
 ```
+// Creates a 2x2 matrix starting from 1 to 8
 
 var matrix = Patronus.Matrix(2, 2).Sequence(1).Print()
+var matrix = Patronus.Sequence(1, 2, 2);
+
+matrix.Print()
 
 // Output
 //
@@ -45,7 +49,12 @@ Creates a matrix with random data
 
 ```
 
+// Creates a 2x2 matrix with random data between -5 and 5
+
 var matrix = Patronus.Matrix(2, 2).Randomize(-5, 5).Print()
+var matrix = Patronus.Random(-5, 5, 2, 2)
+
+matrix.Print();
 
 // Output
 //
@@ -59,11 +68,14 @@ var matrix = Patronus.Matrix(2, 2).Randomize(-5, 5).Print()
 
 ## Padding
 
-Adds padding around the matrix (in all dimensions)
+Adds padding
 
 ```
 
-var matrix = Patronus.Sequence(1, 2, 2).Pad(0).Print()
+var matrix = new Matrix(2, 2).Sequence(1).Pad(0)
+var matrix = Patronus.Sequence(1, 2, 2).Pad(0)
+
+matrix.Print();
 
 // Output
 //
@@ -76,6 +88,8 @@ var matrix = Patronus.Sequence(1, 2, 2).Pad(0).Print()
 
 
 ```
+
+
 
 
 

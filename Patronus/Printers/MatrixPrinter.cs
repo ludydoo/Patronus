@@ -6,4 +6,15 @@ namespace Patronus.Printers
     {
         void Print(IEnumerable<string> matrixStr);
     }
+
+    public class StringListPrinter : IMatrixPrinter
+    {
+        public IEnumerable<string> Output;
+
+        public void Print(IEnumerable<string> matrixStr)
+        {
+            Output = matrixStr;
+        }
+    }
+
 }

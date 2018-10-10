@@ -23,6 +23,8 @@ namespace Patronus.Operators
 
         protected override void DoInference()
         {
+
+
             // Default printer
             if (Printer == null)
                 Printer = new LogPrinter();
@@ -36,28 +38,70 @@ namespace Patronus.Operators
                 return;
             }
 
-            // Convert to string
-            var strMatrix = matrix.Map(arg => arg.ToString());
+            // Get all vector string representations
+            // as a list of strings        
+            var strVectors = matrix.Vectors.Select(v =>
+            {
+                var str = v.ToString();
+                var lines = str.Split(
+                    new[] { "\r\n", "\r", "\n" },
+                    StringSplitOptions.None
+                );
 
-            // Maximum str length
-            var maxLen = strMatrix.Max(s => s.Length);
+                var maxCount = lines.Max(s => s.Length);
 
-            // Convert to char matrix
-            strMatrix = strMatrix.Map(s =>
+                for (var i = 0; i < lines.Length; i++)
                 {
-                    s = " " + s.PadLeft(maxLen) + " ";
-                    return new Matrix<string>(1, s.Length).SetData(s.AsEnumerable().Select(c => c.ToString()));
-                })
-                .Unwrap();
+                    lines[i] = lines[i].PadRight(maxCount);
+                }
 
-            // Remove size 1 dimension
-            strMatrix = strMatrix.Squeeze(strMatrix.DimensionCount - 2);
+                return lines.ToList();
 
-            strMatrix = strMatrix
-                 .Flatten(strMatrix.DimensionCount - 1, strMatrix.DimensionCount - 2, FlattenMode.Interpose);
+            }).ToList();
 
-            // strMatrix = strMatrix
-            //    .Flatten(strMatrix.DimensionCount - 3, strMatrix.DimensionCount - 2, FlattenMode.Extend);
+            // This is the max number of lines for any vector
+            var maxLineCount = strVectors.Max(strings => strings.Count);
+
+            // This is the max number of chars in any line for any vector
+            var maxCharCount = strVectors.Max(strings => strings.Max(s => s.Length));
+
+            // This is an empty line (will be used to pad)
+            var emptyLine = string.Join("", Enumerable.Repeat(" ", maxCharCount));
+
+            // Coerce all lines of all vectors to have the same length
+            // Coerce all vectors to have the same number of lines
+            foreach (var vector in strVectors)
+            {
+                while (vector.Count < maxLineCount)
+                    vector.Add(emptyLine);
+                for (var i = 0; i < vector.Count; i++)
+                    vector[i] = " " + vector[i].PadLeft(maxCharCount) + " " ;
+            }
+
+            maxCharCount += 2;
+
+
+            var strMatrices = strVectors.Select(strings =>
+            {
+                // Create a matrix for each vector
+                var sMatrix = new Matrix<string>(new[] {maxLineCount, maxCharCount});
+
+                var chars = new List<string>();
+                foreach (var line in strings)
+                {
+                    foreach (var c in line)
+                    {
+                        chars.Add(c.ToString());
+                    }
+                }
+
+                sMatrix.SetData(chars);
+                return sMatrix;
+
+            }).ToList();
+
+            // Contains all matrices of all vectors
+            var strMatrix = new Matrix<Matrix<string>>(matrix.Sizes).SetData(strMatrices).Unwrap(UnwrapMode.Expand);
 
             strMatrix = strMatrix.Wrap().Map(matrix1 =>
             {
@@ -67,6 +111,23 @@ namespace Patronus.Operators
                 return m;
             }).Unwrap();
 
+
+           // strMatrix = strMatrix
+            //     .Flatten(strMatrix.DimensionCount - 2, strMatrix.DimensionCount - 4, FlattenMode.Interpose);
+
+            //strMatrix = strMatrix
+            //    .Flatten(strMatrix.DimensionCount - 1, strMatrix.DimensionCount - 2, FlattenMode.Interpose);
+            // strMatrix = strMatrix
+            //    .Flatten(strMatrix.DimensionCount - 3, strMatrix.DimensionCount - 2, FlattenMode.Extend);
+
+            //strMatrix = strMatrix.Wrap().Map(matrix1 =>
+            // {
+            //     var m = matrix1.Pad("+");
+            //    var padding = new Matrix<string>(m.Sizes.ElementAt(0), 1).Fill(" ");
+            //    m = padding.Concat(m, 1).Concat(padding, 1);
+            //    return m;
+            // }).Unwrap();
+
             var current = strMatrix;
 
             var odd = true;
@@ -74,9 +135,10 @@ namespace Patronus.Operators
             while (current.DimensionCount > 2)
             {
 
-                var dimensionTo = odd ? current.DimensionCount - 2 : current.DimensionCount - 1;                                
+                var dimensionTo = odd ? current.DimensionCount - 1 : current.DimensionCount - 2;
 
                 current = current.Flatten(current.DimensionCount - 3, dimensionTo, FlattenMode.Extend);
+
                 current = current.Wrap().Map(matrix1 =>
                 {
                     var paddingChar = odd ? "x" : "+";
