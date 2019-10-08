@@ -112,22 +112,6 @@ namespace Patronus.Operators
             }).Unwrap();
 
 
-           // strMatrix = strMatrix
-            //     .Flatten(strMatrix.DimensionCount - 2, strMatrix.DimensionCount - 4, FlattenMode.Interpose);
-
-            //strMatrix = strMatrix
-            //    .Flatten(strMatrix.DimensionCount - 1, strMatrix.DimensionCount - 2, FlattenMode.Interpose);
-            // strMatrix = strMatrix
-            //    .Flatten(strMatrix.DimensionCount - 3, strMatrix.DimensionCount - 2, FlattenMode.Extend);
-
-            //strMatrix = strMatrix.Wrap().Map(matrix1 =>
-            // {
-            //     var m = matrix1.Pad("+");
-            //    var padding = new Matrix<string>(m.Sizes.ElementAt(0), 1).Fill(" ");
-            //    m = padding.Concat(m, 1).Concat(padding, 1);
-            //    return m;
-            // }).Unwrap();
-
             var current = strMatrix;
 
             var odd = true;
